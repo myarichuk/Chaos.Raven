@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Raven", "Chaos.Raven\Chaos.Raven.csproj", "{9C9FDD96-B892-487F-942B-B564FD29EFA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Raven.Tests", "Chaos.Raven.Tests\Chaos.Raven.Tests.csproj", "{4B7FCF92-4600-4056-89B3-5A68AB07E4E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chaos.Raven.Common", "Chaos.Raven.Common\Chaos.Raven.Common.csproj", "{22F14DD6-262F-4AEB-93F3-3AA76D296AA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C9FDD96-B892-487F-942B-B564FD29EFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9FDD96-B892-487F-942B-B564FD29EFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9FDD96-B892-487F-942B-B564FD29EFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9FDD96-B892-487F-942B-B564FD29EFA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B7FCF92-4600-4056-89B3-5A68AB07E4E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B7FCF92-4600-4056-89B3-5A68AB07E4E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B7FCF92-4600-4056-89B3-5A68AB07E4E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B7FCF92-4600-4056-89B3-5A68AB07E4E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F14DD6-262F-4AEB-93F3-3AA76D296AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F14DD6-262F-4AEB-93F3-3AA76D296AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F14DD6-262F-4AEB-93F3-3AA76D296AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F14DD6-262F-4AEB-93F3-3AA76D296AA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
