@@ -13,7 +13,7 @@ namespace Chaos.Raven.Actions
 
         protected override void GenerateData()
         {
-            dummyUsers = Builder<DummyUser>.CreateListOfSize(Constants.LargeBatchSize).Build().ToList();
+            dummyUsers = Builder<DummyUser>.CreateListOfSize(Constants.SmallBatchSize).Build().ToList();
         }
 
         protected override bool DoAction(IDocumentStore store)
