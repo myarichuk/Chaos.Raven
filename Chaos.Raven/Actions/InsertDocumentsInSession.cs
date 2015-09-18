@@ -12,23 +12,7 @@ namespace Chaos.Raven.Actions
             using (var session = store.OpenSession())
             {
                 for(int i = 0; i < Constants.SmallBatchSize; i++)
-                {
-                    session.Store(new Company
-                    {
-                        Name = Faker.Company.Name(),
-                        Address = new Address
-                        {
-                            City = Faker.Address.City(),
-                            Country = Faker.Address.Country(),
-                            PostalCode = Faker.Address.ZipCode()
-                        },
-                        Contact = new Contact
-                        {
-                            Name = Faker.Name.FullName(),
-                            Title = "Dummy Title"
-                        }
-                    });
-                }
+                    session.Store(DataFactory.Companies.GenerateOne());
                 session.SaveChanges();
             }
         }
