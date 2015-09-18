@@ -11,7 +11,7 @@ namespace Chaos.Raven.Actions
         {
             using (var session = store.OpenSession())
             {
-                session.Advanced.LoadStartingWith<Company>("compan", pageSize:256);
+                session.Advanced.LoadStartingWith<Company>("companies", pageSize:256);
             }
         }
     }

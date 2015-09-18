@@ -20,8 +20,7 @@ namespace Chaos.Raven.Actions
                         {
                             City = Faker.Address.City(),
                             Country = Faker.Address.Country(),
-                            PostalCode = Faker.Address.ZipCode(),
-                            Region = Faker.Address.UsState()
+                            PostalCode = Faker.Address.ZipCode()
                         },
                         Contact = new Contact
                         {

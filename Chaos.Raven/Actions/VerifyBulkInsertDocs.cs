@@ -4,64 +4,31 @@ using Raven.Client;
 using FizzWare.NBuilder;
 using Raven.Client.Indexes;
 using Chaos.Raven.Common;
+using Orders;
 
 namespace Chaos.Raven.Actions
 {
     public class VerifyBulkInsertDocs : BaseVerificationAction
     {
-        List<DummyUser> dummyUsers = new List<DummyUser>();
-
-        protected override void GenerateData()
-        {
-            dummyUsers = Builder<DummyUser>.CreateListOfSize(Constants.SmallBatchSize).Build().ToList();
-        }
-
         protected override bool DoAction(IDocumentStore store)
-        {            
-            new DummyUserIndex().Execute(store); //this will make sure the index is there
+        {
+            var lotsOfOrders = DataFactory.Orders.GenerateMany(Constants.MediumBatchSize).ToList();
             using (var bulkInsert = store.BulkInsert())
-                dummyUsers.ForEach(user => bulkInsert.Store(user));
+                lotsOfOrders.ForEach(order => bulkInsert.Store(order));
 
             WaitForIndexing(store);
 
             using (var session = store.OpenSession())
-            using (var stream = session.Advanced.Stream(session.Query<DummyUser, DummyUserIndex>()))
+            using (var stream = session.Advanced.Stream(session.Query<Order>("Orders/Totals")))
             {
                 do
                 {
-                    if (!dummyUsers.Any(x => x.Id == stream.Current.Key))
+                    if (!lotsOfOrders.Any(x => x.Id == stream.Current.Key))
                         return false;
                 } while (stream.MoveNext());
             }
 
             return true;
         }
-
-        #region Document and Index definitions
-
-        public class DummyUser
-        {
-            public string Id { get; set; }
-
-            public string FirstName { get; set; }
-
-            public string LastName { get; set; }
-        }
-
-        public class DummyUserIndex : AbstractIndexCreationTask<DummyUser>
-        {
-            public DummyUserIndex()
-            {
-                Map = users => from user in users
-                               select new
-                               {
-                                   user.Id,
-                                   user.FirstName,
-                                   user.LastName
-                               };
-            }
-        }
-
-        #endregion
     }
 }

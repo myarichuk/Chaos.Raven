@@ -8,7 +8,6 @@ namespace Chaos.Raven.Common
     {
         public bool VerifyAction(IDocumentStore store, out long elapsedMilliseconds)
         {
-            GenerateData();
             var sw = Stopwatch.StartNew();
             try
             {
@@ -24,8 +23,6 @@ namespace Chaos.Raven.Common
                 elapsedMilliseconds = sw.ElapsedMilliseconds;
             }
         }
-
-        protected virtual void GenerateData() { }
 
         protected abstract bool DoAction(IDocumentStore store);
     }

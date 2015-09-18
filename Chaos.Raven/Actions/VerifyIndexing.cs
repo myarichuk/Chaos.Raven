@@ -37,37 +37,22 @@ namespace Chaos.Raven.Actions
         {
             var ordersIndex = new OrdersIndex();
             ordersIndex.Execute(store);
-            using (var session = store.OpenSession())
-            {
-                var random = new Random(123);
-                for(int i = 0; i < Constants.SmallBatchSize; i++)
-                {
-                    session.Store(new Order
-                    {
-                        OrderedAt = DateTime.UtcNow.AddDays(3),
-                        ShippedAt = DateTime.UtcNow.AddDays(3),
-                        RequireAt = DateTime.UtcNow.AddDays(3),
-                        Employee = "employees/1",
-                        Company = "companies/1",
-                        Freight = random.Next(),
-                        Lines = new List<OrderLine>
-                        {
-                            new OrderLine
-                            {
-                                PricePerUnit = 1.1m,
-                                Product = "products/1",
-                                Quantity = random.Next(1,50),
-                                ProductName = Faker.Lorem.Sentence(2)
-                            }
-                        }
-                    });
-                }
 
-                session.SaveChanges();
+            for (int k = 0; k < 2; k++)
+            {
+                using (var session = store.OpenSession())
+                {
+                    var random = new Random(DateTime.UtcNow.Millisecond);
+                    for (int i = 0; i < Constants.SmallBatchSize; i++) //save one by one on purpose
+                        session.Store(DataFactory.Orders.GenerateOne());
+
+                    session.SaveChanges();
+                }
             }
 
             WaitForIndexing(store);
 
+            //cleanup after the test
             using (var session = store.OpenSession())
             {
                 var relevantOrderCount = session.Query<Order, OrdersIndex>()
