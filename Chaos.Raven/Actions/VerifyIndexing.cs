@@ -12,7 +12,7 @@ using Chaos.Raven.Common;
 
 namespace Chaos.Raven.Actions
 {
-    public class VerifyIndexing : BaseVerificationAction
+    public class VerifyIndexing : VerificationAction
     {
         #region Index Definition
 

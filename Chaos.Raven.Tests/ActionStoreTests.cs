@@ -1,10 +1,5 @@
-﻿using Chaos.Raven;
-using System;
-using Xunit;
-using Raven.Client;
+﻿using Xunit;
 using FluentAssertions;
-using System.ComponentModel.Composition;
-using Chaos.Raven.Common;
 using Raven.Tests.Helpers;
 using Raven.Database.Config;
 
@@ -25,13 +20,28 @@ namespace Chaos.Raven.Tests
         }
 
         [Fact]
+        public void CreateInitialData_works()
+        {
+            using (var store = NewRemoteDocumentStore())
+            {
+                this.Invoking(_ => Utils.CreateInitialData(store, store.DefaultDatabase))
+                    .ShouldNotThrow();
+
+                var stats = store.DatabaseCommands.GetStatistics();
+                stats.CountOfIndexes.Should().BeGreaterThan(1);
+                stats.CountOfDocuments.Should().BeGreaterThan(0);
+            }
+        }
+
+        [Fact]
         public void Action_store_can_resolve_chaos_actions()
         {
             using (var ravenStore = NewRemoteDocumentStore())
             {
-                    var action = store.GetRandomChaosAction();
-                    action.Invoking(x => x.DoSomeChaos(ravenStore))
-                          .ShouldNotThrow();
+                Utils.CreateInitialData(ravenStore, ravenStore.DefaultDatabase);
+                var action = store.GetRandomChaosAction();
+                action.Invoking(x => x.DoSomeChaos(ravenStore))
+                      .ShouldNotThrow();
             }
         }
 
@@ -40,6 +50,7 @@ namespace Chaos.Raven.Tests
         {
             using (var ravenStore = NewRemoteDocumentStore())
             {
+                Utils.CreateInitialData(ravenStore, ravenStore.DefaultDatabase);
                 var action = store.GetRandomVerificationAction();
                 long elapsed;
                 action.Invoking(x => x.VerifyAction(ravenStore, out elapsed))

@@ -8,7 +8,7 @@ using Orders;
 
 namespace Chaos.Raven.Actions
 {
-    public class VerifyBulkInsertDocs : BaseVerificationAction
+    public class VerifyBulkInsertDocs : VerificationAction
     {
         protected override bool DoAction(IDocumentStore store)
         {

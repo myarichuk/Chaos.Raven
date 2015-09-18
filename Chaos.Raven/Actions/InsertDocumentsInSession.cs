@@ -5,7 +5,7 @@ using Chaos.Raven.Common;
 
 namespace Chaos.Raven.Actions
 {
-    public class InsertDocumentsInSession : BaseAction
+    public class InsertDocumentsInSession : ChaosAction
     {
         public override void DoSomeChaos(IDocumentStore store)
         {

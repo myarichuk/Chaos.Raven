@@ -9,7 +9,7 @@ using Chaos.Raven.Common;
 
 namespace Chaos.Raven.Actions
 {
-    public class LoadSomeDocuments : BaseAction
+    public class LoadSomeDocuments : ChaosAction
     {
         int isInitialized;
         readonly List<string> orderIDs;

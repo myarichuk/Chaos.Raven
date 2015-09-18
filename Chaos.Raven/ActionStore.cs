@@ -21,29 +21,29 @@ namespace Chaos.Raven
             container = new WindsorContainer();
 
             container.Register(Classes.FromAssemblyInThisApplication()
-                                      .BasedOn<BaseAction>()
-                                      .OrBasedOn(typeof(BaseVerificationAction))
+                                      .BasedOn<ChaosAction>()
+                                      .OrBasedOn(typeof(VerificationAction))
                                       .WithServiceBase()
                                       .LifestyleTransient());
 
             container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter(actionsFolder))
-                                      .BasedOn<BaseAction>()
-                                      .OrBasedOn(typeof(BaseVerificationAction))
+                                      .BasedOn<ChaosAction>()
+                                      .OrBasedOn(typeof(VerificationAction))
                                       .WithServiceBase()
                                       .LifestyleTransient());
 
-            container.Kernel.AddHandlerSelector(new RandomHandlerSelector<BaseAction>());
-            container.Kernel.AddHandlerSelector(new RandomHandlerSelector<BaseVerificationAction>());
+            container.Kernel.AddHandlerSelector(new RandomHandlerSelector<ChaosAction>());
+            container.Kernel.AddHandlerSelector(new RandomHandlerSelector<VerificationAction>());
         }
 
-        public BaseAction GetRandomChaosAction()
+        public ChaosAction GetRandomChaosAction()
         {
-            return container.Resolve<BaseAction>();
+            return container.Resolve<ChaosAction>();
         }
 
-        public BaseVerificationAction GetRandomVerificationAction()
+        public VerificationAction GetRandomVerificationAction()
         {
-            return container.Resolve<BaseVerificationAction>();
+            return container.Resolve<VerificationAction>();
         }
 
         public void Dispose()

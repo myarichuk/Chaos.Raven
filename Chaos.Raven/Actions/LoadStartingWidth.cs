@@ -5,7 +5,7 @@ using Chaos.Raven.Common;
 
 namespace Chaos.Raven.Actions
 {
-    public class LoadStartingWidth : BaseAction
+    public class LoadStartingWidth : ChaosAction
     {
         public override void DoSomeChaos(IDocumentStore store)
         {
