@@ -9,15 +9,17 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Troschuetz.Random.Distributions.Continuous;
 
 namespace Chaos.Raven
 {
     public class ActionStore : IDisposable
     {
         private readonly IWindsorContainer container;
-
-        public ActionStore(string actionsFolder)       
+        private volatile bool isDisposed;
+        public ActionStore(string actionsFolder)
         {
+            isDisposed = false;
             container = new WindsorContainer();
 
             container.Register(Classes.FromAssemblyInThisApplication()
@@ -38,16 +40,21 @@ namespace Chaos.Raven
 
         public ChaosAction GetRandomChaosAction()
         {
+            if (isDisposed)
+                throw new ObjectDisposedException("ActionStore");
             return container.Resolve<ChaosAction>();
         }
 
         public VerificationAction GetRandomVerificationAction()
         {
+            if (isDisposed)
+                throw new ObjectDisposedException("ActionStore");
             return container.Resolve<VerificationAction>();
         }
 
         public void Dispose()
         {
+            isDisposed = true;
             container.Dispose();
         }
     }

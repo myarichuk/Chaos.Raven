@@ -51,6 +51,10 @@
   <ItemGroup>
     <Compile Include="BaseAction.cs" />
     <Compile Include="ChaosAction.cs" />
+    <Compile Include="Northwind\Northwind.cs" />
+    <Compile Include="Northwind\OrdersByCompany.cs" />
+    <Compile Include="Northwind\OrdersTotals.cs" />
+    <Compile Include="Northwind\ProductsSales.cs" />
     <Compile Include="VerificationAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

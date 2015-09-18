@@ -12,7 +12,7 @@ namespace Chaos.Raven.Actions
     {
         protected override bool DoAction(IDocumentStore store)
         {
-            var lotsOfOrders = DataFactory.Orders.GenerateMany(Constants.MediumBatchSize).ToList();
+            var lotsOfOrders = DataFactory.Orders.GenerateMany(Constants.SmallBatchSize).ToList();
             using (var bulkInsert = store.BulkInsert())
                 lotsOfOrders.ForEach(order => bulkInsert.Store(order));
 

@@ -13,7 +13,7 @@ namespace Chaos.Raven
 
         public IHandler SelectHandler(string key, Type service, IHandler[] handlers)
         {
-            var random = new Random(DateTime.UtcNow.Millisecond);
+            var random = new Random((int)DateTime.UtcNow.Ticks);
             return handlers[random.Next(0, handlers.Length - 1)];
         }
     }

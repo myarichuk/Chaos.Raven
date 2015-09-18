@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using Raven.Client;
+﻿using Raven.Client;
 using Orders;
 using Chaos.Raven.Common;
 
