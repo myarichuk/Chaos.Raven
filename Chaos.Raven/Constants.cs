@@ -4,7 +4,7 @@ namespace Chaos.Raven
 {
     public static class Constants
     {
-        public const int LargeBatchSize = 1024 * 4;
+        public const int LargeBatchSize = 1024 * 2;
         public const int MediumBatchSize = 512;
         public const int SmallBatchSize = 128;
 
@@ -12,7 +12,9 @@ namespace Chaos.Raven
 
         public const int ActionDispatchFrequencyInMilliseconds = 250;
 
-        public const int MaxConcurrentActions = 250;
+        public const int LoadGenerationDuration = 200;
+
+        public static readonly int MaxConcurrentActions = Environment.ProcessorCount * 2;
 
         public static readonly int NumOfActionsPerDispatch = Environment.ProcessorCount;
 

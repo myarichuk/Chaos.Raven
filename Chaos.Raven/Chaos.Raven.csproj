@@ -74,9 +74,11 @@
   <ItemGroup>
     <Compile Include="ActionStore.cs" />
     <Compile Include="Actions\DeleteDocumentsInSession.cs" />
+    <Compile Include="Actions\GetStatsLoadGenerator.cs" />
     <Compile Include="Actions\InsertDocumentsInSession.cs" />
     <Compile Include="Actions\LoadSomeDocuments.cs" />
     <Compile Include="Actions\LoadStartingWidth.cs" />
+    <Compile Include="Actions\QueryLoadGenerator.cs" />
     <Compile Include="Actions\ResetAllIndexes.cs" />
     <Compile Include="Actions\VerifyBulkInsertDocs.cs" />
     <Compile Include="Actions\VerifyIndexing.cs" />

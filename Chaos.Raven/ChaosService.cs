@@ -68,19 +68,19 @@ namespace Chaos.Raven
         }
 
         private void DispatchActions()
-        {            
+        {
             Parallel.For(0, numOfActionsPerDispatch, i =>
             {
                 if (!concurrentActionsSemaphore.Wait(1000, cts.Token))
                     return; //too much concurrent actions, nothing to do
 
                 var useVerificationAction = new Random(DateTime.UtcNow.Millisecond).Next() % 3 == 0;
-                cts.Token.ThrowIfCancellationRequested();
+                cts.Token.ThrowIfCancellationRequested();              
 
                 if (useVerificationAction)
                 {
                     var action = actionStore.GetRandomVerificationAction();
-                    ExecutingActions.GetOrAdd(action,DateTime.UtcNow);
+                    ExecutingActions.GetOrAdd(action, DateTime.UtcNow);
 
                     long elapsed;
                     try

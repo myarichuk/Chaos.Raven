@@ -25,7 +25,12 @@ namespace Chaos.Raven.Service
                 });
             };
 
-            Get["/errors"] = _ => Response.AsJson(ChaosService.ActionErrors);
+            Get["/errors"] = _ => Response.AsJson(ChaosService.ActionErrors.Select(x => new
+            {
+                WhenHappened = x.Value,
+                x.Key.Message,
+                x.Key.StackTrace
+            }).Take(1024).ToList());
 
             Get["/actions"] = _ =>
             {

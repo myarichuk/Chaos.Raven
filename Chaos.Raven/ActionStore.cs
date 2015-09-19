@@ -25,17 +25,20 @@ namespace Chaos.Raven
             container.Register(Classes.FromAssemblyInThisApplication()
                                       .BasedOn<ChaosAction>()
                                       .OrBasedOn(typeof(VerificationAction))
+                                      .OrBasedOn(typeof(LoadGenerationAction))
                                       .WithServiceBase()
                                       .LifestyleTransient());
 
             container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter(actionsFolder))
                                       .BasedOn<ChaosAction>()
                                       .OrBasedOn(typeof(VerificationAction))
+                                      .OrBasedOn(typeof(LoadGenerationAction))
                                       .WithServiceBase()
                                       .LifestyleTransient());
 
             container.Kernel.AddHandlerSelector(new RandomHandlerSelector<ChaosAction>());
             container.Kernel.AddHandlerSelector(new RandomHandlerSelector<VerificationAction>());
+            container.Kernel.AddHandlerSelector(new RandomHandlerSelector<LoadGenerationAction>());
         }
 
         public ChaosAction GetRandomChaosAction()
@@ -50,6 +53,13 @@ namespace Chaos.Raven
             if (isDisposed)
                 throw new ObjectDisposedException("ActionStore");
             return container.Resolve<VerificationAction>();
+        }
+
+        public LoadGenerationAction GetRandomLoadGenerationAction()
+        {
+            if (isDisposed)
+                throw new ObjectDisposedException("ActionStore");
+            return container.Resolve<LoadGenerationAction>();
         }
 
         public void Dispose()
