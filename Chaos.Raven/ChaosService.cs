@@ -49,8 +49,6 @@ namespace Chaos.Raven
             {
                 if (stats.CountOfDocuments == 0)
                     Task.Run(() => Utils.CreateInitialData(documentStore, databaseName));
-                else
-                    Utils.ExecuteIndexes(documentStore);
 
                 isInitialized = true;
             }
