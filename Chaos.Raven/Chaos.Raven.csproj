@@ -77,14 +77,17 @@
     <Compile Include="Actions\InsertDocumentsInSession.cs" />
     <Compile Include="Actions\LoadSomeDocuments.cs" />
     <Compile Include="Actions\LoadStartingWidth.cs" />
+    <Compile Include="Actions\ResetAllIndexes.cs" />
     <Compile Include="Actions\VerifyBulkInsertDocs.cs" />
     <Compile Include="Actions\VerifyIndexing.cs" />
+    <Compile Include="Actions\VerifyPatching.cs" />
     <Compile Include="ChaosService.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DataFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomHandlerSelector.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="VerificationActionFailedException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

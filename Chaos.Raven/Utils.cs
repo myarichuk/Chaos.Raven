@@ -48,6 +48,15 @@ namespace Chaos.Raven
             new OrdersByCompany().Execute(store);
             new OrdersTotals().Execute(store);
             new ProductSales().Execute(store);
+            new OrderLines_ByProduct().Execute(store);
+        }
+
+        public static void ExecuteIndexes(IDocumentStore store)
+        {
+            new OrdersByCompany().Execute(store);
+            new OrdersTotals().Execute(store);
+            new ProductSales().Execute(store);
+            new OrderLines_ByProduct().Execute(store);
         }
     }
 }

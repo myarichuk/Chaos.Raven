@@ -49,7 +49,9 @@ namespace Chaos.Raven
             {
                 if (stats.CountOfDocuments == 0)
                     Task.Run(() => Utils.CreateInitialData(documentStore, databaseName));
-                    
+                else
+                    Utils.ExecuteIndexes(documentStore);
+
                 isInitialized = true;
             }
             try 
@@ -72,7 +74,7 @@ namespace Chaos.Raven
                 if (!concurrentActionsSemaphore.Wait(1000, cts.Token))
                     return; //too much concurrent actions, nothing to do
 
-                var useVerificationAction = new Random(DateTime.UtcNow.Millisecond).Next() % 5 == 0;
+                var useVerificationAction = new Random(DateTime.UtcNow.Millisecond).Next() % 3 == 0;
                 cts.Token.ThrowIfCancellationRequested();
 
                 if (useVerificationAction)
@@ -83,7 +85,11 @@ namespace Chaos.Raven
                     long elapsed;
                     try
                     {
-                        action.VerifyAction(documentStore, out elapsed);
+                        var hasSucceeded = action.VerifyAction(documentStore, out elapsed);
+                        if(!hasSucceeded)
+                        {
+                            throw new VerificationActionFailedException(action.GetType().Name, elapsed);
+                        }
                     }
                     catch (Exception e)
                     {

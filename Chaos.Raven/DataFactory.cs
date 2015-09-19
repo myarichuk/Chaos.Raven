@@ -195,9 +195,9 @@ namespace Chaos.Raven
 
         public static class Orders
         {
-            private static IdFactory productsIdFactory = new IdFactory("products",75);
-            private static IdFactory employeesIdFactory = new IdFactory("employees",9);
-            private static IdFactory companiesIdFactory = new IdFactory("companies",90);
+            private static IdFactory productsIdFactory = new IdFactory("products",Constants.NumOfProducts);
+            private static IdFactory employeesIdFactory = new IdFactory("employees",Constants.NumOfEmployees);
+            private static IdFactory companiesIdFactory = new IdFactory("companies",Constants.NumOfCompanies);
             private static RandomGenerator random = new RandomGenerator(DateTime.UtcNow.Millisecond);
 
             public static IEnumerable<Order> GenerateMany(int size)
